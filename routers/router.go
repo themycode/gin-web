@@ -25,6 +25,9 @@ func Init(r *gin.Engine) {
 			user.POST("/add", func(c *gin.Context) {
 				user_http.Add(c)
 			})
+			user.POST("/find", func(c *gin.Context) {
+				user_http.Find(c)
+			})
 		}
 	}
 }

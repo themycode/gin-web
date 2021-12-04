@@ -7,6 +7,6 @@ type User struct {
 	Sex int8 `form:"sex" json:"sex" binding:"required,oneof=1 2"`
 }
 
-func (User) TableName() string {
-	return "user"
+type FindUser struct {
+	ID int `json:"id" binding:"required"`
 }
