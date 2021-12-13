@@ -3,7 +3,7 @@ package models
 import (
 	"errors"
 	"github.com/CoderSamYhc/gin-web/db"
-	"github.com/CoderSamYhc/gin-web/http/requests/user_request"
+	user_request "github.com/CoderSamYhc/gin-web/http/requests/user"
 )
 
 type User struct {

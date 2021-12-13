@@ -12,8 +12,8 @@ import (
 
 func Add(c *gin.Context)  {
 	var (
-		params user_request.AddUser
-		err error
+		params user.AddUser
+		err    error
 	)
 	err = c.ShouldBindJSON(&params)
 	if err != nil {
