@@ -14,12 +14,6 @@ func Init(r *gin.Engine) {
 
 	v1 := r.Group("v1")
 	{
-		v1.GET("/", func(c *gin.Context) {
-			c.JSON(200, "v1")
-		})
-		v1.GET("/read", func(c *gin.Context) {
-			c.JSON(200, "read")
-		})
 		user := v1.Group("user")
 		{
 			user.POST("/add", func(c *gin.Context) {

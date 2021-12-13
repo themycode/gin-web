@@ -26,6 +26,11 @@ func init() {
 
 func Translate(err error) map[string][]string {
 	var result = make(map[string][]string)
+	if err.Error() == "EOF" {
+		result["error"] = append(result["error"], "未传递参数")
+		return result
+	}
+
 	errors := err.(validator.ValidationErrors)
 	for _, err := range errors {
 		result[err.Field()] = append(result[err.Field()], err.Translate(trans))

@@ -1,9 +1,9 @@
 package user_http
 
 import (
-	"github.com/CoderSamYhc/gin-web/entity"
 	"github.com/CoderSamYhc/gin-web/http"
 	"github.com/CoderSamYhc/gin-web/http/requests"
+	"github.com/CoderSamYhc/gin-web/http/requests/user_request"
 	"github.com/CoderSamYhc/gin-web/models"
 	"github.com/gin-gonic/gin"
 )
@@ -12,7 +12,7 @@ import (
 
 func Add(c *gin.Context)  {
 	var (
-		params entity.User
+		params user_request.AddUser
 		err error
 	)
 	err = c.ShouldBindJSON(&params)
