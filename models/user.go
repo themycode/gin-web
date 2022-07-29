@@ -3,7 +3,7 @@ package models
 import (
 	"errors"
 	"github.com/CoderSamYhc/gin-web/db"
-	user_request "github.com/CoderSamYhc/gin-web/http/requests/user"
+	user_request "github.com/CoderSamYhc/gin-web/http/requests/user_request"
 )
 
 type User struct {
@@ -14,7 +14,7 @@ type User struct {
 }
 
 func (u *User) TableName() string {
-	return "user"
+	return "user_request"
 }
 
 func (u *User) Add(params *user_request.AddUser) (int, error) {
