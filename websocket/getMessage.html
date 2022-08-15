@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>test</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<script type="text/javascript">
+		function LinkServer() {
+			var Server_Com;
+			if ("WebSocket" in window) {
+				Server_Com = new WebSocket("ws://127.0.0.1:13000/getTime")
+				console.log("建立连接")
+			}
+
+
+			Server_Com.onopen = function () {
+				console.log("建立连接后触发 connected to ");
+
+				Server_Com.send("hello World");
+				console.log("发送消息")
+
+			}
+			Server_Com.onmessage = function (event) {
+				var resp = event.data;
+				if (resp === "hello client!") {
+					console.log("接收到服务器消息", resp)
+				} else {
+					document.getElementById("Time").textContent = resp;
+					document.getElementById("success").textContent = "连接成功"
+					console.log("接收到服务器数据:" + resp);
+				}
+
+			}
+			
+		}
+		
+	</script>
+
+</head>
+
+<body>
+	<p>服务器时间:</p>
+	<p id="Time">2022-03-02 20:00:00</p>
+	<p id="success" style="color: forestgreen;"></p>
+	<button onclick="LinkServer()">连接服务器</button>
+	<button id="stop">连接关闭</button>
+
+</body>
+
+</html>

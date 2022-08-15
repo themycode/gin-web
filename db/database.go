@@ -3,8 +3,9 @@ package db
 import (
 	"encoding/json"
 	"fmt"
-	"gorm.io/gorm"
+
 	"gorm.io/driver/mysql"
+	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
 	"gorm.io/gorm/schema"
 )
@@ -22,7 +23,7 @@ var DB *DBConn
 func InitDB() {
 	// 数据库连接
 
-	dsn := "root:123456@tcp(localhost:3306)/gin-web?charset=utf8mb4&parseTime=True&loc=Local"
+	dsn := "root:root@tcp(localhost:3306)/pydata?charset=utf8mb4&parseTime=True&loc=Local"
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{
 		Logger: logger.Default.LogMode(logger.Info), // 打印所有执行的SQL
 		NamingStrategy: schema.NamingStrategy{
@@ -39,7 +40,7 @@ func InitDB() {
 		print(err.Error())
 	}
 	sqlDB.SetMaxIdleConns(100) // 设置最大连接数
-	sqlDB.SetMaxOpenConns(50) // 设置最大空闲连接数
+	sqlDB.SetMaxOpenConns(50)  // 设置最大空闲连接数
 
 	// 获取sql配置情况
 	sqlStats, _ := json.Marshal(sqlDB.Stats())

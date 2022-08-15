@@ -1,0 +1,65 @@
+<!DOCTYPE html5>
+<html lang="en">
+
+<head>
+	<title>websocket</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+	<script type="text/javascript">
+		var sock = null;
+		var wsuri = "ws://127.0.0.1:12312/client/123";
+		var pullMessage = "ws://127.0.0.1:12312/message";
+
+		window.onload = function () {
+			sock = new WebSocket(wsuri);
+			// 建立连接后触发
+			sock.onopen = function () {
+				console.log("建立连接后触发 connected to " + wsuri);
+			}
+
+			sock.addEventListener("message", function (event) {
+				console.log("Message from server ", event.data);
+				receivedMsgContainer.value = event.data;
+			});
+
+			sock.onclose = function (e) {
+				console.log("连接关闭了");
+				console.log(e);
+			}
+
+			sock.onmessage = function (e) {
+				console.log('收到消息了', e.data);
+				writeToScreen('<span style="color: blue;">RESPONSE: ' + e.data + '</span>');
+				// websocket.close();
+			}
+			sock.onerror = function (e) {
+				console.log('出错了');
+				console.log(e);
+			}
+		}
+		function send() {
+			var msg = document.getElementById('message').value;
+			sock.send(msg);
+		}
+		function writeToScreen(message) {
+			var pre = document.createElement("p");
+			pre.style.wordWrap = "break-word";
+			pre.innerHTML = message;
+			output.appendChild(pre);
+		}
+
+	</script>
+	<h1>websocket demo</h1>
+	<form>
+		<p>
+			Message:<input id="message" type="text" value="test" />
+		</p>
+	</form>
+	<button onclick="send()">发送消息</button>
+	<button id="stop"></button>
+</body>
+
+</html>

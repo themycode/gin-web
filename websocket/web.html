@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>websocket</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+	<script type="text/javascript">
+		var sock = null;
+		var wsuri = "ws://127.0.0.1:8080/ws";
+
+		window.onload = function () {
+
+			sock = new WebSocket(wsuri);
+			// 建立连接后触发
+			sock.onopen = function () {
+				console.log("建立连接后触发 connected to " + wsuri);
+			}
+
+			sock.onmessage = function (e) {
+				console.log('收到消息了');
+				document.getElementById("msg").innerText += e.data + "\n";
+				// websocket.close();
+			}
+
+			sock.onclose = function (e) {
+				console.log("连接关闭了");
+				console.log(e);
+			}
+
+			sock.onerror = function (e) {
+				console.log('出错了');
+				console.log(e);
+			}
+		}
+		function send() {
+			var msg = document.getElementById('message').value;
+			sock.send(msg);
+		}
+		function stop() {
+			sock.close();
+		}
+		function writeToScreen(message) {
+			var pre = document.createElement("p");
+			pre.style.wordWrap = "break-word";
+			pre.innerHTML = message;
+			output.appendChild(pre);
+		}
+
+	</script>
+	<h1>websocket demo</h1>
+	<form>
+		<p>
+			Message:<input id="message" type="text" value="test" />
+		</p>
+
+	</form>
+	<button onclick="send()">发送消息</button>
+	<button onclick="stop()">关闭连接</button>
+	<h3 id="msg">content:</h3>
+</body>
+
+</html>
