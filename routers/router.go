@@ -14,7 +14,7 @@ func Init(r *gin.Engine) {
 
 	v1 := r.Group("v1")
 	{
-		user := v1.Group("user")
+		user := v1.Group("user_request")
 		{
 			user.POST("/add", func(c *gin.Context) {
 				user_http.Add(c)
